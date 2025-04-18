@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Subjects</title>
+    <link rel="stylesheet" href="{% static 'css/view_subjects_no_branch.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Subjects</h1>
+        <ul class="subject-list">
+            {% for subject in subjects %}
+                <li class="subject-item">
+                    <a href="{% url 'create_timetable_no_branch' course_id=subject.course.id semester_id=subject.semester.id subject_id=subject.id %}">
+                        {{ subject.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+

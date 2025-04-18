@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Semesters for {{ branch.name }}</title>
+</head>
+<body>
+    <h1>Semesters for {{ branch.name }}</h1>
+    <ul>
+        {% for semester in semesters %}
+            <li><a href="{% url 'semester_student_list' semester.id %}">{{ semester.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+

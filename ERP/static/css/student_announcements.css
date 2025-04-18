@@ -1,0 +1,58 @@
+.announce {
+    max-width: 1200px;
+    margin: 50px; 
+    margin-left: 150px; 
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+    background-color:#3B82F6;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.announce-header {
+    text-align: center;
+    font-size: 20px;
+    background-color: #cdc9c9;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.announce .announcement {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(238, 237, 237); 
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.announce .announcement p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: black; 
+}
+
+.announce .announcement a {
+    color: #007bff; 
+    font-weight: 800;
+}
+
+.announce .announcement a:hover {
+    text-decoration: underline; 
+}
+
+.announce .announcement p.posted-on {
+    font-style: italic; 
+    font-size: 15px; 
+    color: #999; 
+}

@@ -1,0 +1,13 @@
+<div class="attendance-progress-bars">
+    {% for subject_info in subject_data %}
+        <div class="progress-bar">
+            <div class="subject-name">{{ subject_info.subject_name }}</div>
+            <div class="progress">
+                <div class="progress-bar-inner" style="width: {{ subject_info.attendance_percentage }}%;">
+                    {{ subject_info.attendance_percentage }}%
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+

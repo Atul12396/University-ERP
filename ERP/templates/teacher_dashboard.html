@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Dashboard</title>
+  <!-- Google Fonts & Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <!-- New Dashboard CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="waviy">
+      <span style="--i:1">L</span>
+      <span style="--i:2">o</span>
+      <span style="--i:3">a</span>  
+      <span style="--i:4">d</span>
+      <span style="--i:5">i</span>
+      <span style="--i:6">n</span>
+      <span style="--i:7">g</span>
+      <span style="--i:8">.</span>
+      <span style="--i:9">.</span>
+      <span style="--i:10">.</span>
+    </div>
+  </div>
+  
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h2> Teacher Dashboard </h2>
+      <ul>
+        <li>
+          <span class="material-icons-sharp">D</span>
+          <a href="{% url 'teacher_dashboard' %}" aria-expanded="false">Dashboard</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">today</span>
+          <a href="{% url 'all_subjects' %}">Mark Attendance</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">grid_view</span>
+          <a href="{% url 'upload_marks' %}">Upload Marks</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">password</span>
+          <a href="{% url 'view_timetable' %}">View TimeTable</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">campaign</span>
+          <a href="{% url 'teacher_announcements' %}">Announcements</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'teacher_apply_leave' %}">Leave Application</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'teacher_leave_status' %}">Leave Status</a>
+        </li>
+
+      </ul>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          Dashboard
+        </div>
+        <div class="nav-right">
+          <span class="material-icons-sharp">notifications</span>
+          <span class="user-profile">
+            <img src="{% static 'images/ion/man (1).png' %}" alt="{{ request.user.get_full_name }} Profile">
+          </span>
+        </div>
+      </header>
+      
+      <!-- Main Content Sections -->
+      <section class="main-content">
+        <!-- Inline Profile Section -->
+        <div class="profile-inline">
+          <div class="profile-card">
+            <div class="profile-photo">
+              <img src="{% static 'images/ion/man (1).png' %}" alt="{{ request.user.get_full_name }} Profile Picture">
+            </div>
+            <div class="profile-details">
+              <p>Hey, <b>{{ request.user.get_full_name }}</b></p>
+              <small>{{ request.user.email }}</small>
+            </div>
+          </div>
+        </div>
+        
+       <!-- Attendance Section -->
+       <!-- <div class="attendance-section">
+        <main>
+          <h1>Mark Attendance</h1>
+          <div class="subjects">
+          
+            <div class="{{ subject.class_name }}">
+              <span class="material-icons-sharp"></span>
+              <h3></h3>
+              <h2></h2>
+              <div class="progress">
+                <svg><circle cx="38" cy="38" r="36"></circle></svg>
+                <div class="number"><p></p></div>
+              </div>
+              <small class="text-muted">Mark</small>
+            </div>
+            
+          </div>
+        </main>
+      </div> -->
+      
+  
+        
+        <!-- Announcements Section (Horizontal Layout) -->
+        <div class="announcements-section">
+          <h2>Announcements</h2>
+          <div class="updates horizontal">
+            {% for announcement in announcements %}
+            <div class="announcement-message">
+              <p>{{ announcement.title }}</p>
+              <p>{{ announcement.content }}</p>
+              {% if announcement.file %}  
+              <a href="{{ announcement.file.url }}" download>Download PDF</a>
+              {% endif %}
+              <p><small>{{ announcement.posted_on }}</small> Posted on</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script src="timeTable.js"></script>
+  <script src="app.js"></script>
+
+  
+  <!-- Required vendors -->
+  <script src="{% static 'vendor/global/global.min.js' %}"></script>
+  <!-- Student Dashboard Scripts -->
+  <script src="{% static 'js/custom.min.js' %}"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+
+
+</body>
+</html>

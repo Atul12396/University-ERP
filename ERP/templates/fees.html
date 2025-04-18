@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/pay_fees.css' %}">
+    <title>Pay Fees</title>
+</head>
+<body>
+    
+    {% block content %}
+    <div class="fees-container">
+        <h2>Fee Structure</h2>
+        <p><strong>School:</strong> {{ fee_structure.school.name }}</p>
+        <p><strong>Course:</strong> {{ fee_structure.program.name }}</p>
+        <p><strong>Registration Fees:</strong> ₹{{ fee_structure.registration_fees }}</p>
+        <p><strong>Academic Fees:</strong> ₹{{ fee_structure.academic_fees }}</p>
+        
+        {% if hostel_fees %}
+    <p><strong>Hostel Fees:</strong> ₹{{ hostel_fees }}</p>
+{% endif %}
+
+ 
+{% if transport_fees %}
+<p><strong>Transport Fees:</strong> ₹{{ transport_fees }}</p>
+{% endif %}
+
+
+ 
+
+        
+        <p><strong>Miscellaneous Fees:</strong> ₹{{ miscellaneous_fees }}</p>
+        <p><strong>Fine Fees:</strong> ₹{{ fees_fine }}</p>
+        <p><strong>Total Fees:</strong> ₹{{ total_fees }}</p>
+        <p><strong>Amount Paid:</strong> ₹{{ paid_amount }}</p>
+        <p><strong>Due Amount:</strong> ₹{{ due_amount }}</p>
+
+        {% if due_amount > 0 %}
+            <form method="post" action="{% url 'pay_fees' %}">
+                {% csrf_token %}
+                <button type="submit">Pay Fees</button>
+            </form>
+        {% else %}
+            <p style="color: green; font-weight: bold;">All fees are paid!</p>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+</body>
+</html>

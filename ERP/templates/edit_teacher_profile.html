@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Teacher Profile</title>
+    <!-- Add your CSS links here -->
+</head>
+<body>
+    <h1>Edit Teacher Profile</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Add your form fields here -->
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" value="{{ teacher.user.email }}" required><br><br>
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" name="profile_picture" id="profile_picture"><br><br>
+        <label for="contact">Contact:</label>
+        <input type="text" name="contact" id="contact" value="{{ teacher.contact }}" required><br><br>
+        <label for="address">Address:</label>
+        <textarea name="address" id="address" required>{{ teacher.address }}</textarea><br><br>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>

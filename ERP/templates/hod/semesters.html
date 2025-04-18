@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semesters</title>
+
+    <!-- Google Fonts & Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+
+    <!-- New Dashboard CSS -->
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/hod-semesters.css' %}">
+</head>
+<body>
+
+   
+ <!-- Preloader -->
+ <div id="preloader">
+    <div class="waviy">
+      <span style="--i:1">L</span>
+      <span style="--i:2">o</span>
+      <span style="--i:3">a</span>  
+      <span style="--i:4">d</span>
+      <span style="--i:5">i</span>
+      <span style="--i:6">n</span>
+      <span style="--i:7">g</span>
+      <span style="--i:8">.</span>
+      <span style="--i:9">.</span>
+      <span style="--i:10">.</span>
+    </div>
+  </div>
+  
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h2> HOD Dashboard </h2>
+      <ul>
+        <li>
+          <span class="material-icons-sharp">home</span>
+          <a href="javascript:void()" aria-expanded="false">Home</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">today</span>
+          <a href="{% url 'hod-subjects' %}"> Subjects</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">grid_view</span>
+          <a href="{% url 'add-subject' %}"> Add Subjects</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">password</span>
+          <a href="{% url 'hod-teachers' %}"> Teachers</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">campaign</span>
+          <a href="{% url 'hod-students' %}"> Students </a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'hod-semesters' %}"> Semester </a>
+        </li>
+
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'hod-branches' %}"> Branch </a>
+        </li>
+
+      </ul>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          Dashboard
+        </div>
+        <div class="nav-right">
+          <span class="material-icons-sharp">notifications</span>
+          <span class="user-profile">
+            <img src="{{ MEDIA_URL }}{{ request.user.get_full_name  }}" alt="{{ hod_details.name }} Profile">
+          </span>
+        </div>
+      </header>
+
+
+        <div class="kiwi">
+            <h1>Semesters</h1>
+            <ul class="semester-container">
+                {% for semester in semesters %}
+                <li>
+                    <a href="{% url 'edit_semester' semester.id %}" class="semester-name">{{ semester.name }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+    <script>
+        $(document).ready(function() {
+            $(".semester-name a").click(function(e) {
+                // Prevent clicking if the click is not on the link itself
+                e.stopPropagation();
+            });
+    
+            $(".semester-name").click(function() {
+                var semesterId = $(this).data("id");
+                window.location.href = "{% url 'edit_semester' 0 %}" + semesterId + "/";
+            });
+        });
+    </script>
+    <!-- Required vendors -->
+  <script src="{% static 'vendor/global/global.min.js' %}"></script>
+ 
+  
+  <!-- Dashboard 1 -->
+  
+  <script src="{% static 'js/custom.min.js' %}"></script>
+  <script src="{% static 'js/dlabnav-init.js' %}"></script>
+
+</body>
+</html>

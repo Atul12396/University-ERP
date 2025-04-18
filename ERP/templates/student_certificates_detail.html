@@ -1,0 +1,22 @@
+<!-- student_certificates_detail.html -->
+
+<h1>{{ student.name }}'s Certificates</h1>
+
+<ul>
+    {% for certificate in certificates %}
+        <li>{{ certificate.certificate_type }}: <a href="{{ certificate.certificate_file.url }}" target="_blank">View Certificate</a></li>
+    {% empty %}
+        <li>No certificates uploaded.</li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h2>Upload New Certificate</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+

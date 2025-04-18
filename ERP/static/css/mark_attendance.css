@@ -1,0 +1,206 @@
+body {
+    font-family: Arial, sans-serif;
+  background-color: #1E1E2F;
+}
+
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    margin-top: 40px;
+    padding: 25px;
+    background-color: #FFFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+}
+
+h2 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 40px;
+    background-color: #3B82F6;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.header-right {
+    position:sticky;
+    left: 1400px;
+    
+}
+
+
+a.btn {
+    color: white; 
+    font-size: 20px;
+    text-decoration: none;
+    display: inline-block; 
+    padding: 15px 30px; /* Add padding */
+    background-color: #007bff; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+a.btn:hover {
+    background-color: #0056b3;
+}
+ 
+.attendance-form {
+    margin-bottom: 20px;
+}
+
+/* Styles for Submit button */
+.submit-button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white; 
+    padding: 10px 20px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px; 
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+/* Styles for Download Attendance report button */
+.download-button {
+    background-color: #3B82F6; 
+    border: none;
+    color: white; 
+    padding: 10px 20px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px; 
+    cursor: pointer;
+    border-radius: 5px; 
+}
+
+/* Hover effect for buttons */
+.submit-button:hover, .download-button:hover {
+    opacity: 0.8; 
+}
+
+
+input[type="date" i] {
+    font-family: monospace;
+    padding-inline-start: 1px;
+    cursor: default;
+    align-items: center;
+    display: inline-flex;
+    overflow: hidden;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: rgb(223, 223, 223);
+}
+
+#all_students {
+    font-size: 17px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+     
+}
+
+label {
+    cursor: default;
+    margin-top: 10px;
+    
+
+}
+    option[value="True"] {
+            color: green; 
+    }
+    option[value="False"] {
+            color: red; 
+        }
+    option[value="Event"] {
+            color: blue; 
+        }
+    option[value="MST"] {
+            color: orange;/
+        }
+
+    #present {
+        color:#4CAF50;
+    }
+    #absent {
+        color:crimson;
+    }
+    #event {
+        color:#007bff;
+    }
+    #mst {
+        color: orange;
+    }
+
+/* Styles for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color:black
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+ 
+}
+
+td label {
+    cursor: default;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Radio button styles */
+input[type="radio"] {
+    width: 1.6em;
+    height: 1.6em;
+    display: inline-block;
+    appearance: none;
+    background: rgb(182, 182, 182);
+    border-radius: 50%;
+}
+
+input[type="radio"]:checked {
+    border-radius: 50%;
+}
+
+input[type="radio"][value="True"]:checked {
+    background: green;
+}
+
+input[type="radio"][value="False"]:checked {
+    background: red;
+}
+
+input[type="radio"][value="Event"]:checked {
+    background: blue;
+}
+
+input[type="radio"][value="MST"]:checked {
+    background: orange;
+}
+
+#hh1{
+    color:black;
+}

@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #ffffff;
+    background-color: #C73538;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.semester-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.semester-item {
+    margin-bottom: 10px;
+}
+
+.semester-item a {
+    display: block;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.semester-item a:hover {
+    background-color: #D6EEEE;
+}

@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pay Fees</title>
+</head>
+<body>
+    <h1>Pay Fees for {{ student.name }}</h1>
+
+    {% if miscellaneous_fees or fees_fine != 0 %}
+
+    <p>Total Fees: 
+        {{ student.fee_structure.registration_fees|floatformat:2 }} + 
+        {{ student.fee_structure.academic_fees|floatformat:2 }} + 
+        {{ student.miscellaneous_fees|floatformat:2 }} + 
+        {% if transport_fees %}{{ transport_fees|floatformat:2 }}{% else %}0.00{% endif %} = 
+        {{ student.fee_structure.registration_fees|add:student.fee_structure.academic_fees|add:student.miscellaneous_fees|add:transport_fees|floatformat:2 }}
+     </p>
+     
+
+       {% else %}
+
+       <p>Total Fees: {{ student.fee_structure.registration_fees|floatformat:2 }} + 
+        {{ student.fee_structure.academic_fees|floatformat:2 }}  = {{ student.fee_structure.registration_fees|add:student.fee_structure.academic_fees|floatformat:2 }}</p>
+
+    {% endif %}
+
+    <p>Paid Amount: {{ paid_amount|default:0|floatformat:2 }}</p>
+    <p>Remaining Amount: {% if miscellaneous_fees or fees_fine != 0 %}  {{ remaining_amount|floatformat:2 }} + {{ student.miscellaneous_fees|floatformat:2 }} = {{ remaining_amount|add:student.miscellaneous_fees|floatformat:2 }}   {% endif %}</p>
+
+    {% if hostel_fees %}
+    <p><strong>Hostel Fees:</strong> ₹{{ hostel_fees }}</p>
+    <p>Remaining Amount: {% if miscellaneous_fees or fees_fine != 0 %}  {{ remaining_amount|floatformat:2 }} + {{ student.miscellaneous_fees|floatformat:2 }} + {{ hostel_fees|floatformat:2 }} = {{ remaining_amount|add:student.miscellaneous_fees|add:hostel_fees|floatformat:2 }}   {% endif %}</p>
+{% endif %}
+
+
+
+    {% if remaining_amount > 0 %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Pay Fees</button>
+        </form>
+    {% else %}
+        <p><strong>All dues are cleared!</strong></p>
+    {% endif %}
+</body>
+</html>
+
+
+

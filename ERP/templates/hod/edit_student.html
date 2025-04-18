@@ -1,0 +1,20 @@
+<!-- edit_student.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/edit_student_details.css">
+    <title>Edit Student</title>
+</head>
+<body>
+    <div class="main-student">
+    <h1>Edit Student</h1>
+    <form action="{% url 'update_student' student.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>

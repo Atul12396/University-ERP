@@ -1,0 +1,77 @@
+.announce {
+    max-width: 1000px;
+    margin: 100px ;
+    margin-left: 250px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+ 
+
+
+h1 {
+    text-align: center;
+    background-color: #3B82F6;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.announce .announcement {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(238, 237, 237); /* Set the background color with some transparency */
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.announce .announcement p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: black; /* Set the color of paragraphs to black */
+}
+
+.announce .announcement a {
+    color: #007bff; /* Set the color of links to blue */
+    font-weight: 800;
+
+}
+
+.announce .announcement a:hover {
+    text-decoration: underline; /* Add underline effect on hover for links */
+}
+
+.announce .announcement p:posted-on {
+    font-style: italic; 
+    font-size: 15px; 
+    color: #999; 
+}
+
+.chuha{
+    color:black;
+    margin-top:2px;
+}
+
+#leaveStatusTable{
+    color: black;
+}
+.hh{
+    color: black;
+}
+#table{
+    margin-left: 200px;
+    margin-bottom: 30px;
+
+}

@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Attendance</title>
+    <link rel="stylesheet" href="{% static 'css/subject_details.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+   
+    <link rel="stylesheet" href="{% static 'css/all_subjects.css' %}">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- New Dashboard CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <link href="{% static 'css/subject_details.css' %}" rel="stylesheet">
+</head>
+<body>
+   <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="waviy">
+          <span style="--i:1">L</span>
+          <span style="--i:2">o</span>
+          <span style="--i:3">a</span>  
+          <span style="--i:4">d</span>
+          <span style="--i:5">i</span>
+          <span style="--i:6">n</span>
+          <span style="--i:7">g</span>
+          <span style="--i:8">.</span>
+          <span style="--i:9">.</span>
+          <span style="--i:10">.</span>
+        </div>
+      </div>
+      
+      <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+          <h3> Teacher Dashboard </h3>
+          <ul>
+            <li>
+              <span class="material-icons-sharp">D</span>
+              <a href="{% url 'teacher_dashboard' %}" aria-expanded="false">Dashboard</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">today</span>
+              <a href="{% url 'all_subjects' %}">Mark Attendance</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">grid_view</span>
+              <a href="{% url 'upload_marks' %}">Upload Marks</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">password</span>
+              <a href="{% url 'view_timetable' %}">View TimeTable</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">campaign</span>
+              <a href="{% url 'teacher_announcements' %}">Announcements</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">payments</span>
+              <a href="{% url 'teacher_apply_leave' %}">Leave Application</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">payments</span>
+              <a href="{% url 'teacher_leave_status' %}">Leave Status</a>
+            </li>
+    
+          </ul>
+        </aside>
+
+
+        <main class="content">
+            <!-- Top Navbar -->
+            <header class="top-navbar">
+              <div class="nav-left">
+                Dashboard
+              </div>
+              <div class="nav-right">
+                <span class="material-icons-sharp">notifications</span>
+                <span class="user-profile">
+                  <img src="{% static 'images/ion/man (1).png' %}" alt="{{ request.user.get_full_name }} Profile">
+                </span>
+              </div>
+            </header>
+
+
+<div class="paneer">
+    <h2>{{ subject.name }} Attendance</h2>
+    <ul>
+        {% for student in students %}
+            <li>{{ student.name }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'mark_attendance' subject_id=subject.id %}" class="btn btn-primary">Mark Attendance &rarr;</a>
+
+</div>
+
+  <!-- Required vendors -->
+  <script src="{% static 'vendor/global/global.min.js' %}"></script>
+ 
+  
+  <!-- Dashboard 1 -->
+  
+  <script src="{% static 'js/custom.min.js' %}"></script>
+  <script src="{% static 'js/dlabnav-init.js' %}"></script>
+ 
+</body>
+</html>
+
+
+
+{% comment %} <h2>{{ subject.name }} Details</h2>
+<ul>
+  {% for student in students %}
+    <li>{{ student.user.first_name }} {{ student.user.last_name }} ({{ student.user.username }})</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'mark_attendance' subject.id %}" class="btn btn-primary">Mark Attendance</a> {% endcomment %}

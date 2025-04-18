@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Semester</title>
+</head>
+<body>
+    <h1>Select Semester</h1>
+    <ul>
+        {% for semester in semesters %}
+            <li><a href="{% url 'list_students' semester.id %}">{{ semester.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

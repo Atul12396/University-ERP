@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Students</title>
+</head>
+<body>
+    <h1>Students</h1>
+    <ul>
+        {% for student in students %}
+            <li>
+                <strong>{{ student.name }}</strong>:
+                <a href="{% url 'update_student' student.id %}">Update Student</a> |
+                <a href="{% url 'move_to_next_semester' student.id %}">Move to Next Semester</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

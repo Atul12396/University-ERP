@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Program</title>
+</head>
+<body>
+    <h1>Select Program</h1>
+    <ul>
+        {% for program in programs %}
+            <li><a href="{% url 'select_semester' program.id %}">{{ program.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
