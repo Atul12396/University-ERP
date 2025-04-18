@@ -25,6 +25,7 @@ from registration_app.views import create_timetable_no_branch, create_timetable_
 urlpatterns = [
 
     path('admin/', admin.site.urls),
+    path('', include('ERP.urls')),
     path('select2/', include('django_select2.urls')),
     path('hod-dashboard/', views.hod_dashboard, name='hod-dashboard'),
     path('', views.SignupPage, name='signup'),
