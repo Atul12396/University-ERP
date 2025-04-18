@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: erp-web
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn ERP.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: ERP.settings
+      - key: DATABASE_URL
+        value: YOUR_DATABASE_URL   # You can skip this if using SQLite
+      - key: DJANGO_SECRET_KEY
+        value: django-insecure-+0dr_mh&r(fmbnwn)a^%knh06o!ohoa2p*x)pxsz#=qj2b1_)6
