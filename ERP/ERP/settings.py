@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-+0dr_mh&r(fmbnwn)a^%knh06o!ohoa2p*x)pxsz#=qj2b1_)6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = os.getenv('uday-doam.onrender.com', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = ['uday-doam.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
