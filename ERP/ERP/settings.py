@@ -152,6 +152,7 @@ LOGIN_URL = 'login'
 # settings.py
 LOGIN_REDIRECT_URL = '/mark_attendance/1/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 
