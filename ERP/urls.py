@@ -19,13 +19,11 @@ from registration_app import views
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.conf import settings
-from registration_app import views
 from registration_app.views import create_timetable_no_branch, create_timetable_with_branch, hod_dashboard,student_section_dashboard,account_section,assign_fee_structure,pay_fees,select_course,select_program,select_semester,list_students,edit_student,apply_leave,manage_leave_request,hod_leave_requests,teacher_leave_status
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path('', include('ERP.urls')),
     path('select2/', include('django_select2.urls')),
     path('hod-dashboard/', views.hod_dashboard, name='hod-dashboard'),
     path('', views.SignupPage, name='signup'),
