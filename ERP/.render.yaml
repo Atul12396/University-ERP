@@ -3,9 +3,9 @@ services:
     name: erp-web
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python manage.py migrate && gunicorn ERP.wsgi:application
+    startCommand: python manage.py migrate && gunicorn ERP.ERP.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: ERP.settings
+        value: ERP.ERP.settings
       - key: DJANGO_SECRET_KEY
         value: django-insecure-+0dr_mh&r(fmbnwn)a^%knh06o!ohoa2p*x)pxsz#=qj2b1_)6
