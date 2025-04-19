@@ -13,5 +13,7 @@ services:
         value: ERP.ERP.settings
       - key: DATABASE_URL
         value: postgresql://erp_db_l9ll_user:7oIqpuFNLtcdLgbw7I7gvK6wdkCXjdyL@dpg-d01kjhadbo4c738rur60-a/erp_db_l9ll
+      - key: DEBUG
+        value: 'False'
       - key: DJANGO_SECRET_KEY
         value: django-insecure-+0dr_mh&r(fmbnwn)a^%knh06o!ohoa2p*x)pxsz#=qj2b1_)6
