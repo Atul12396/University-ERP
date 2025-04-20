@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Branches for {{ course.name }}</title>
+</head>
+<body>
+    <h1>Branches for {{ course.name }}</h1>
+    <ul>
+        {% for branch in branches %}
+            <li><a href="{% url 'semester_list' branch.id %}">{{ branch.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+

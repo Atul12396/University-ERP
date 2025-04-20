@@ -1,0 +1,163 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOD Dashboard</title>
+
+    <!-- Google Fonts & Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+
+  <!-- New Dashboard CSS -->
+  <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+
+</head>
+<body>
+  
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="waviy">
+      <span style="--i:1">L</span>
+      <span style="--i:2">o</span>
+      <span style="--i:3">a</span>  
+      <span style="--i:4">d</span>
+      <span style="--i:5">i</span>
+      <span style="--i:6">n</span>
+      <span style="--i:7">g</span>
+      <span style="--i:8">.</span>
+      <span style="--i:9">.</span>
+      <span style="--i:10">.</span>
+    </div>
+  </div>
+  
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h2> HOD Dashboard </h2>
+      <ul>
+        <li>
+          <span class="material-icons-sharp">home</span>
+          <a href="{{hod_leave_requests}}" aria-expanded="false">Home</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">today</span>
+          <a href="{% url 'hod-subjects' %}"> Subjects</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">grid_view</span>
+          <a href="{% url 'add-subject' %}"> Add Subjects</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">password</span>
+          <a href="{% url 'hod-teachers' %}"> Teachers</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">campaign</span>
+          <a href="{% url 'hod-students' %}"> Students </a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'hod-semesters' %}"> Semester </a>
+        </li>
+
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'hod-branches' %}"> Branch </a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">today</span>
+          <a href="{% url 'hod_leave_requests' %}">Leave Requests</a>
+        </li>
+
+      </ul>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          Dashboard
+        </div>
+        <div class="nav-right">
+          <span class="material-icons-sharp">notifications</span>
+          <span class="user-profile">
+            <img src="{% static 'images/ion/man (1).png' %}" alt="{{ hod_details.name }} Profile">
+          </span>
+        </div>
+      </header>
+
+  <!-- Main Content Sections -->
+  <section class="main-content">
+    <!-- Inline Profile Section -->
+    <div class="profile-inline">
+      <div class="profile-card">
+        <div class="profile-photo">
+          <img src="{% static 'images/ion/man (1).png' %}" alt="{{ hod_details.name }} Profile Picture">
+        </div>
+        <div class="profile-details">
+          <p>Hey, <b>{{  request.user }}</b></p>
+          <small>{{  request.user }}</small>
+        </div>
+      </div>
+    </div>
+    
+   <!-- Attendance Section -->
+   <div class="attendance-section">
+    <main>
+      <h1>Attendance</h1>
+      <div class="subjects">
+        {% for subject in subject_data %}
+        <div class="{{ subject.class_name }}">
+          <span class="material-icons-sharp">{{ subject.icon }}</span>
+          <h3>{{ subject.subject_name }}</h3>
+          <h2>{{ subject.attendance }}</h2>
+          <div class="progress">
+            <svg><circle cx="38" cy="38" r="36"></circle></svg>
+            <div class="number"><p>{{ subject.attendance_percentage|floatformat:2 }}%</p></div>
+          </div>
+          <small class="text-muted">Total Attendance</small>
+        </div>
+        {% endfor %}
+      </div>
+    </main>
+  </div>
+  
+
+    
+    <!-- Announcements Section (Horizontal Layout) -->
+    <div class="announcements-section">
+      <h2>Announcements</h2>
+      <div class="updates horizontal">
+        {% for announcement in announcements %}
+        <div class="announcement-message">
+          <p>{{ announcement.title }}</p>
+          <p>{{ announcement.content }}</p>
+          {% if announcement.file %}  
+          <a href="{{ announcement.file.url }}" download>Download PDF</a>
+          {% endif %}
+          <p><small>{{ announcement.posted_on }}</small> Posted on</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+
+<script src="timeTable.js"></script>
+<script src="app.js"></script>
+
+
+<!-- Required vendors -->
+<script src="{% static 'vendor/global/global.min.js' %}"></script>
+<!-- Student Dashboard Scripts -->
+<script src="{% static 'js/custom.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+ 
+
+.paneer {
+    max-width: 1200px;
+    margin: 150px;
+    margin-left: 150px; 
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+}
+
+h2 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 40px;
+    background-color: #3B82F6;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+
+a.btn {
+    color: white; /* White color for text */
+    font-size: 20px;
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Display as inline-block element */
+    padding: 15px 30px; /* Add padding */
+    background-color: #007bff; /* Blue background color */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+a.btn:hover {
+    background-color: #0056b3; /* Darker blue background color on hover */
+}

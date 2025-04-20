@@ -1,0 +1,60 @@
+/* Add this CSS code to your project's CSS file (e.g., style.css) */
+.attendance-progress-bars {
+    display: flex;
+    justify-content: center; /* Center-align the items horizontally */
+    align-items: center; /* Center-align the items vertically */
+    /* Adjust this value to leave the desired gap on the left */
+}
+.progress-bar {
+    margin: 10px 0;
+    margin-left: 100px;
+    padding-left: 100;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+.subject-name {
+    font-weight: bold;
+}
+
+.progress {
+    background-color: #ddd;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    line-height: 20px;
+    text-align: center;
+    background-color: #4caf50; /* Change the color based on your design */
+    color: #fff;
+    border-radius: 5px;
+}
+.progress-bar {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+.subject-name {
+    font-weight: bold;
+}
+
+.progress {
+    background-color: #ddd;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.progress-bar-inner {
+    height: 100%;
+    line-height: 20px;
+    text-align: center;
+    background-color: #4caf50; /* Change the color based on your design */
+    color: #fff;
+    border-radius: 5px;
+}
+

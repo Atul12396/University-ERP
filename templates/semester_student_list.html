@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students for {{ semester.name }}</title>
+</head>
+<body>
+    <h1>Students for {{ semester.name }}</h1>
+    <ul>
+        {% for student in students %}
+            <li>
+                {{ student.name }} - Total Paid: {{ student.total_paid }} - Remaining Amount: {{ student.remaining_amount }}
+                <a href="{% url 'assign_fee_structure' student.id %}">Assign Fee Structure</a> |
+                <a href="{% url 'pay_fees' student.id %}">Pay Fees</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

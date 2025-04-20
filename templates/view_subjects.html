@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Subjects</title>
+    <link rel="stylesheet" href="{% static 'css/view_subjects.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Subjects for {{ course.name }} - {{ semester.name }}</h1>
+        {% if branch %}
+            <h2>Branch: {{ branch.name }}</h2>
+        {% endif %}
+        <h3>School: {{ school.name }}</h3>
+
+        <ul class="subject-list">
+            {% if subjects %}
+                {% for subject in subjects %}
+                    <li class="subject-item">
+                        <a href="{% if branch %}{% url 'create_timetable_with_branch' school_id=school.id course_id=subject.course.id branch_id=branch.id semester_id=subject.semester.id subject_id=subject.id %}{% else %}{% url 'create_timetable' school_id=school.id course_id=subject.course.id semester_id=subject.semester.id subject_id=subject.id %}{% endif %}">
+                            {{ subject.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>No subjects available for the selected criteria.</p>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>
+

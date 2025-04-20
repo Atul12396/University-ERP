@@ -1,0 +1,63 @@
+.announce {
+    max-width: 1000px;
+    margin: 150px ;
+    margin-left: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color:black;
+}
+
+ 
+
+
+h1 {
+    text-align: center;
+    background-color: #3B82F6;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.announce .announcement {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255); /* Set the background color with some transparency */
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.announce .announcement p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: black; /* Set the color of paragraphs to black */
+}
+
+.announce .announcement a {
+    color: #007bff; /* Set the color of links to blue */
+    font-weight: 800;
+
+}
+
+.announce .announcement a:hover {
+    text-decoration: underline; /* Add underline effect on hover for links */
+}
+
+.announce .announcement p:posted-on {
+    font-style: italic; 
+    font-size: 15px; 
+    color: #999; 
+}
+
+ 

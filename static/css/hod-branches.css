@@ -1,0 +1,62 @@
+.peach {
+    max-width: 1000px;
+    margin: 50px;
+    margin-left: 200px;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: white; 
+    font-size: 40px; 
+    margin-bottom: 40px; 
+    background-color: #3B82F6 ; 
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.branch-name {
+    text-align: left;
+}
+
+.branch-container {
+    margin: 0 auto; /* Center the semester container */
+}
+
+.branch-container li {
+    margin-bottom: 10px; /* Add spacing between list items */
+}
+
+.branch-container a {
+    color: black; 
+    font-size: 20px;
+    text-decoration: none; 
+    display: block; 
+    padding: 30px; 
+    background-color: #f2f2f2; 
+    border-radius: 15px; /* Add border radius for rounded corners */
+    transition: background-color 0.3s ease;
+}
+
+.branch-container a:hover {
+    background-color:rgb(228, 228, 228); 
+    text-decoration: none; 
+}
+
+.branch-container .branch-name {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.branch-container .branch-name:hover {
+    transform: scale(1.04);
+}

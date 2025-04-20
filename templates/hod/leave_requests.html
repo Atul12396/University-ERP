@@ -1,0 +1,78 @@
+{% block content %}
+<h2>Manage Leave Requests</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Teacher Name</th>
+            <th>Leave Type</th>
+            <th>Reason</th>
+            <th>Dates</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="leaveTableBody">
+        {% for leave in pending_leaves %}
+        <tr id="leaveRow-{{ leave.id }}">
+            <td>{{ leave.teacher.user.get_full_name }}</td>
+            <td>{{ leave.leave_type }}</td>
+            <td>{{ leave.reason }}</td>
+            <td>{{ leave.start_date }} to {{ leave.end_date }}</td>
+            <td id="leaveStatus-{{ leave.id }}">{{ leave.status }}</td>
+            <td>
+                <button class="btn btn-success approve-btn" data-id="{{ leave.id }}" data-action="approve">Approve</button>
+                <button class="btn btn-danger reject-btn" data-id="{{ leave.id }}" data-action="reject">Reject</button>
+            </td>
+        </tr>
+        {% empty %}
+        <tr id="noPendingLeaves">
+            <td colspan="6">No pending leave requests.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- JavaScript for AJAX Handling -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".approve-btn, .reject-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            let leaveId = this.getAttribute("data-id");
+            let action = this.getAttribute("data-action");
+
+            if (!confirm(`Are you sure you want to ${action} this leave request?`)) {
+                return;
+            }
+
+            fetch(`/hod/manage_leave_request/${leaveId}/${action}/`, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById(`leaveStatus-${leaveId}`).innerText = action === "approve" ? "Approved" : "Rejected";
+                    document.getElementById(`leaveRow-${leaveId}`).style.backgroundColor = action === "approve" ? "#d4edda" : "#f8d7da";
+                    
+                    // Remove row after some time
+                    setTimeout(() => {
+                        document.getElementById(`leaveRow-${leaveId}`).remove();
+                        if (document.querySelectorAll("#leaveTableBody tr").length === 0) {
+                            document.getElementById("leaveTableBody").innerHTML = '<tr><td colspan="6">No pending leave requests.</td></tr>';
+                        }
+                    }, 2000);
+                } else {
+                    alert("Something went wrong!");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    });
+});
+</script>
+{% endblock %}

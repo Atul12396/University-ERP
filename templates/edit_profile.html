@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %} <!-- Include the CSRF token for form security -->
+        
+        {{ edit_profile_form.as_p }}
+
+        <!-- Add file input field for profile picture -->
+        
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>
+

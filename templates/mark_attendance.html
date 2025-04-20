@@ -1,0 +1,200 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Attendance</title>
+    <link rel="stylesheet" href="{% static 'css/mark_attendance.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+</head>
+<body>
+ 
+  
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h3>Teacher Dashboard </h3>
+      <ul>
+        <li>
+          <span class="material-icons-sharp">D</span>
+          <a href="{% url 'teacher_dashboard' %}" aria-expanded="false">Dashboard</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">today</span>
+          <a href="{% url 'all_subjects' %}">Mark Attendance</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">grid_view</span>
+          <a href="{% url 'upload_marks' %}">Upload Marks</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">password</span>
+          <a href="{% url 'view_timetable' %}">View TimeTable</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">campaign</span>
+          <a href="{% url 'teacher_announcements' %}">Announcements</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'teacher_apply_leave' %}">Leave Application</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'teacher_leave_status' %}">Leave Status</a>
+        </li>
+
+      </ul>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          Dashboard
+        </div>
+        <div class="nav-right">
+          <span class="material-icons-sharp">notifications</span>
+          <span class="user-profile">
+            <img src="{% static 'images/ion/man (1).png' %}" alt="{{ request.user.get_full_name }} Profile">
+          </span>
+        </div>
+      </header>
+
+
+<div class="container">
+  <h2>Mark Attendance for {{ subject.name }}</h2>
+
+  <!-- Display success or error messages -->
+  {% if messages %}
+    {% for message in messages %}
+      <div style="color: black;" class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+<!-- Form to mark attendance -->
+<form id="mark_attendance_form" class="attendance-form" method="post">
+  {% csrf_token %}
+  <input type="date" id="attendance_date_from" name="date_from" required>
+  <input type="date" id="attendance_date_to" name="date_to" required>
+  <!-- Add a hidden input field to store the subject_id -->
+  <input type="hidden" id="subject_id" name="subject_id" value="{{ subject.id }}">
+  
+  <!-- Add select-all dropdown for attendance status -->
+  <span class="header-right">
+  <label for="all_students">Select All:</label>
+  <select id="all_students" name="all_students">
+      <option value="True">Present</option>
+      <option value="False">Absent</option>
+      <option value="Event">Event</option>
+      <option value="MST">MST</option>
+  </select>
+  </span>
+    
+      <form method="post" >
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Roll Number</th>
+                    <th>Present</th>
+                    <th>Absent</th>
+                    <th>Event</th>
+                    <th>MST</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in subject.students.all %}
+                    <tr>
+                        <td>
+                            <label for="student_{{ student.id }}">{{ student.user.username }}</label>
+                        </td>
+                        <td>
+                            {{ student.roll_number }}
+                        </td>
+                        <td>
+                            <label>
+                                <input type="radio" name="student_{{ student.id }}" value="True" checked>
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="radio" name="student_{{ student.id }}" value="False">
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="radio" name="student_{{ student.id }}" value="Event">
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                <input type="radio" name="student_{{ student.id }}" value="MST">
+                            </label>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="submit-button">Submit Attendance</button>
+
+    </form>
+  <!-- Button to trigger attendance report download -->
+  <button id="download_report_btn" class="download-button">Download Attendance Report</button>
+</div>
+
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // Function to construct the download URL and trigger download
+    $('#download_report_btn').click(function() {
+        // Get subject_id from hidden input field
+        var subject_id = $('#subject_id').val();
+        // Get start and end dates from the input fields
+        var dateFrom = $('#attendance_date_from').val().trim();
+        var dateTo = $('#attendance_date_to').val().trim();
+        
+        // Check if the dates are valid
+        if (dateFrom !== '' && dateTo !== '') {
+            // Format the dates to match the expected format (e.g., YYYY-MM-DD)
+            var formattedDateFrom = formatDate(dateFrom);
+            var formattedDateTo = formatDate(dateTo);
+            // Construct the URL
+            var url = `/download_attendance_report/${subject_id}/${formattedDateFrom}/${formattedDateTo}/`;
+            // Trigger download
+            window.location.href = url;
+        } else {
+            alert('Please select valid start and end dates.');
+        }
+    });
+
+    // Add change event listener to the select-all dropdown
+    $('#all_students').change(function() {
+        var selectedStatus = $(this).val();
+        $('input[name^="student_"]').each(function() {
+            $(this).prop('checked', selectedStatus === $(this).val());
+        });
+    });
+
+    // Function to format the date to YYYY-MM-DD format
+    function formatDate(dateString) {
+        var dateObj = new Date(dateString);
+        var year = dateObj.getFullYear();
+        var month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+        var day = dateObj.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+});
+</script>
+
+</body>
+</html>

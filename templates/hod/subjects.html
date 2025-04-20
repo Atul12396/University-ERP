@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Google Fonts & Material Icons -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+        <!-- New Dashboard CSS -->
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/subjects.css' %}">
+    <title>Subjects</title>
+</head>
+<body>
+
+
+       <!-- Preloader -->
+  <div id="preloader">
+    <div class="waviy">
+      <span style="--i:1">L</span>
+      <span style="--i:2">o</span>
+      <span style="--i:3">a</span>  
+      <span style="--i:4">d</span>
+      <span style="--i:5">i</span>
+      <span style="--i:6">n</span>
+      <span style="--i:7">g</span>
+      <span style="--i:8">.</span>
+      <span style="--i:9">.</span>
+      <span style="--i:10">.</span>
+    </div>
+  </div>
+  
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <h2> HOD Dashboard </h2>
+      <ul>
+        <li>
+          <span class="material-icons-sharp">home</span>
+          <a href="javascript:void()" aria-expanded="false">Home</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">today</span>
+          <a href="{% url 'hod-subjects' %}"> Subjects</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">grid_view</span>
+          <a href="{% url 'add-subject' %}"> Add Subjects</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">password</span>
+          <a href="{% url 'hod-teachers' %}"> Teachers</a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">campaign</span>
+          <a href="{% url 'hod-students' %}"> Students </a>
+        </li>
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'hod-semesters' %}"> Semester </a>
+        </li>
+
+        <li>
+          <span class="material-icons-sharp">payments</span>
+          <a href="{% url 'hod-branches' %}"> Branch </a>
+        </li>
+
+      </ul>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="content">
+      <!-- Top Navbar -->
+      <header class="top-navbar">
+        <div class="nav-left">
+          Dashboard
+        </div>
+        <div class="nav-right">
+          <span class="material-icons-sharp">notifications</span>
+          <span class="user-profile">
+            <img src="{{ MEDIA_URL }}{{ request.user.get_full_name  }}" alt="{{ hod_details.name }} Profile">
+          </span>
+        </div>
+      </header>
+      
+
+        <div class="main-subject">
+            <h1>Subjects</h1>
+            {% if subjects %}
+                <div class="subject-container">
+                    <ul>
+                        {% for subject in subjects %}
+                            <li>
+                                <div class="subject-name">
+                                    <a href="{% url 'edit_subject' subject.id %}">{{ subject.name }}</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>  
+                </div>
+            {% else %}
+                <p>No subjects found.</p>
+            {% endif %}
+        </div>
+        
+    <script>
+        $(document).ready(function() {
+            $("#branch-filter").change(function() {
+                var selectedBranchId = $(this).val();
+                if (selectedBranchId === "all") {
+                    // Show all subjects
+                    $("tr").show();
+                } else {
+                    // Hide subjects not matching the selected branch
+                    $("tr[data-branch]").hide();
+                    $("tr[data-branch='" + selectedBranchId + "']").show();
+                }
+            });
+    
+            $(".subject-name a").click(function(e) {
+                // Prevent clicking if the click is not on the link itself
+                e.stopPropagation();
+            });
+    
+            $(".subject-name").click(function() {
+                var subjectId = $(this).data("id");
+                window.location.href = "{% url 'edit_subject' 0 %}" + subjectId + "/";
+            });
+        });
+    </script>
+
+ 
+
+                <!-- Required vendors -->
+  <script src="{% static 'vendor/global/global.min.js' %}"></script>
+ 
+  
+  <!-- Dashboard 1 -->
+  
+  <script src="{% static 'js/custom.min.js' %}"></script>
+  <script src="{% static 'js/dlabnav-init.js' %}"></script>
+
+</body>
+</html>

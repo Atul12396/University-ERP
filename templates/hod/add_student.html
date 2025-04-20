@@ -1,0 +1,259 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+    
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+  <!--*******************
+        Preloader start
+    ******************** -->
+    <div id="preloader">
+        <div class="waviy">
+       <span style="--i:1">L</span>
+       <span style="--i:2">o</span>
+       <span style="--i:3">a</span>
+       <span style="--i:4">d</span>
+       <span style="--i:5">i</span>
+       <span style="--i:6">n</span>
+       <span style="--i:7">g</span>
+       <span style="--i:8">.</span>
+       <span style="--i:9">.</span>
+       <span style="--i:10">.</span>
+    </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <a href="" class="brand-logo">
+        <!-- <svg class="logo-abbr" width="53" height="53" viewBox="0 0 53 53">
+          <path class="svg-logo-primary-path" d="M48.3418 41.8457H41.0957C36.8148 41.8457 33.332 38.3629 33.332 34.082C33.332 29.8011 36.8148 26.3184 41.0957 26.3184H48.3418V19.2275C48.3418 16.9408 46.4879 15.0869 44.2012 15.0869H4.14062C1.85386 15.0869 0 16.9408 0 19.2275V48.8594C0 51.1462 1.85386 53 4.14062 53H44.2012C46.4879 53 48.3418 51.1462 48.3418 48.8594V41.8457Z" fill="#5BCFC5"/>
+          <path class="svg-logo-primary-path" d="M51.4473 29.4238H41.0957C38.5272 29.4238 36.4375 31.5135 36.4375 34.082C36.4375 36.6506 38.5272 38.7402 41.0957 38.7402H51.4473C52.3034 38.7402 53 38.0437 53 37.1875V30.9766C53 30.1204 52.3034 29.4238 51.4473 29.4238ZM41.0957 35.6348C40.2382 35.6348 39.543 34.9396 39.543 34.082C39.543 33.2245 40.2382 32.5293 41.0957 32.5293C41.9532 32.5293 42.6484 33.2245 42.6484 34.082C42.6484 34.9396 41.9532 35.6348 41.0957 35.6348Z" fill="#5BCFC5"/>
+        </svg>
+                 -->
+        <p class="brand-title" width="124px" height="33px"  style="font-size: 27px;">Student Section</p>
+            </a>
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+    
+    
+    
+    <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+              <div class="dashboard_bar">
+                                Dashboard 
+                            </div>
+                        </div>
+                    
+                    </div>
+        </nav>
+      </div>
+    </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        <div class="dlabnav">
+            <div class="dlabnav-scroll">
+        <ul class="metismenu" id="menu">
+          <li class="dropdown header-profile">
+            <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
+              <img src="{% static 'images/ion/man (1).png' %}" width="20" alt=""/>
+              <div class="header-info ms-3">
+                <span class="font-w600">Hi, <b>{{ request.user.get_full_name }}</b></span>
+                <small class="text-end font-w400">{{ request.user.email }}</small>
+            </div>
+            
+            </a>
+            
+          </li>
+                    <li><a href="javascript:void()" aria-expanded="false">
+              <i class="flaticon-025-dashboard"></i>
+              <span class="nav-text">Dashboard</span>
+            </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'add_student' %}" aria-expanded="false" id="all-subjects-link">
+                          <i class="flaticon-050-info"></i>
+                          <span class="nav-text">Add New Student</span>
+                      </a>
+                  </li>
+                  
+                    <li><a href="{% url 'select_course'   %}">
+                      <i class="flaticon-041-graph"></i>
+                      <span class="nav-text">Update Student</span>
+            </a>
+                    </li>
+                   <li><a href="{% url 'add_student_certificate' %}">
+                     <i class="flaticon-086-star"></i>
+                     <span class="nav-text">Add certificate for students</span>
+            </a>
+                    </li>
+
+                    <li><a href="{% url 'student_documents_list' %}">
+              <i class="flaticon-045-heart"></i>
+              <span class="nav-text">Update certificates</span>
+            </a>
+                    </li>
+                    
+
+                    
+                </ul>
+      </div>
+        </div>
+
+
+<form method="post" hx-post="/add-student/" hx-trigger="submit">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_course">Select Course</label>
+        <select name="course" id="id_course" class="form-control" hx-get="/get_branches/0/">
+            <option value="">Select Course</option>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="id_branch">Select Branch</label>
+        <select name="branch" id="id_branch" class="form-control" hx-get="/get_semesters/0/">
+            <option value="">Select Branch</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="id_semester">Select Semester</label>
+        <select name="semester" id="id_semester" class="form-control" hx-get="/get_subjects/0/">
+            <option value="">Select Semester</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="id_subjects">Select Subjects</label>
+        <select name="subjects" id="id_subjects" class="form-control" multiple>
+            <!-- Options will be added dynamically using JavaScript -->
+        </select>
+    </div>
+    <!-- Render only the remaining form fields from StudentForm -->
+    <div class="form-group">
+        <label for="id_user">User</label>
+        <select name="user" required id="id_user">
+            <option value="">---------</option>
+            <!-- Include options for users here -->
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="id_gender">Gender</label>
+        <input type="text" name="gender" maxlength="50" required id="id_gender">
+    </div>
+    <div class="form-group">
+        <label for="id_name">Name</label>
+        <input type="text" name="name" maxlength="255" required id="id_name">
+    </div>
+    <div class="form-group">
+        <label for="id_contact">Contact</label>
+        <input type="text" name="contact" maxlength="20" required id="id_contact">
+    </div>
+    <div class="form-group">
+        <label for="id_address">Address</label>
+        <textarea name="address" cols="40" rows="10" required id="id_address"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="id_roll_number">Roll number</label>
+        <input type="text" name="roll_number" maxlength="20" id="id_roll_number">
+    </div>
+    <div class="form-group">
+        <label for="id_student_id">Student ID</label>
+        <input type="text" name="student_id" maxlength="20" id="id_student_id">
+    </div>
+    <div class="form-group">
+        <label for="id_profile_picture">Profile picture</label>
+        <input type="file" name="profile_picture" accept="image/*" id="id_profile_picture">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Student</button>
+</form>
+
+<script>
+    document.getElementById('id_course').addEventListener('change', function() {
+        var course_id = this.value;
+        var branchDropdown = document.getElementById('id_branch');
+        branchDropdown.innerHTML = '<option value="">Select branch below</option>';
+        fetch(`/get_branches/${course_id}/`)
+            .then(response => response.json())
+            .then(data => {
+                branchDropdown.innerHTML += data.branch_options; // Append options instead of replacing them
+            });
+    });
+
+    document.getElementById('id_branch').addEventListener('change', function() {
+        var branch_id = this.value;
+        var semesterDropdown = document.getElementById('id_semester');
+        semesterDropdown.innerHTML = '<option value="">Select Semester below</option>';
+        fetch(`/get_semesters/${branch_id}/`)
+            .then(response => response.json())
+            .then(data => {
+                semesterDropdown.innerHTML += data.semester_options; // Append options instead of replacing them
+            });
+    });
+
+    document.getElementById('id_semester').addEventListener('change', function() {
+        var semester_id = this.value; // Get the selected semester ID
+        var subjectDropdown = document.getElementById('id_subjects'); // Get the subject dropdown element
+        subjectDropdown.innerHTML = ''; // Clear existing options
+        fetch(`/get_subjects/${semester_id}/`) // Fetch subjects for the selected semester
+            .then(response => response.json())
+            .then(data => {
+                data.subject_options.forEach(option => {
+                    var optionElem = document.createElement('option');
+                    optionElem.value = option.value;
+                    optionElem.textContent = option.label;
+                    subjectDropdown.appendChild(optionElem);
+                });
+            });
+    });
+</script>
+
+
+  <!-- Required vendors -->
+    <script src="{% static 'vendor/global/global.min.js' %}"></script>
+ 
+  
+     <!-- Dashboard 1 -->
+              
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <script src="{% static 'js/dlabnav-init.js' %}"></script>
+
+</body>
+</html>

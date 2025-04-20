@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/teacher_announcements.css' %}">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+  <!-- New Dashboard CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Teacher Announcements</title>
+</head>
+<body>
+      <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="waviy">
+       <span style="--i:1">L</span>
+       <span style="--i:2">o</span>
+       <span style="--i:3">a</span>
+       <span style="--i:4">d</span>
+       <span style="--i:5">i</span>
+       <span style="--i:6">n</span>
+       <span style="--i:7">g</span>
+       <span style="--i:8">.</span>
+       <span style="--i:9">.</span>
+       <span style="--i:10">.</span>
+    </div>
+    </div>
+      
+      <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+          <h2> Teacher Dashboard </h2>
+          <ul>
+            <li>
+              <span class="material-icons-sharp">D</span>
+              <a href="{% url 'teacher_dashboard' %}" aria-expanded="false">Dashboard</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">today</span>
+              <a href="{% url 'all_subjects' %}">Mark Attendance</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">grid_view</span>
+              <a href="{% url 'upload_marks' %}">Upload Marks</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">password</span>
+              <a href="{% url 'view_timetable' %}">View TimeTable</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">campaign</span>
+              <a href="{% url 'teacher_announcements' %}">Announcements</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">payments</span>
+              <a href="{% url 'teacher_apply_leave' %}">Leave Application</a>
+            </li>
+            <li>
+              <span class="material-icons-sharp">payments</span>
+              <a href="{% url 'teacher_leave_status' %}">Leave Status</a>
+            </li>
+    
+          </ul>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="content">
+          <!-- Top Navbar -->
+          <header class="top-navbar">
+            <div class="nav-left">
+              Dashboard
+            </div>
+            <div class="nav-right">
+              <span class="material-icons-sharp">notifications</span>
+              <span class="user-profile">
+                <img src="{% static 'images/ion/man (1).png' %}" alt="{{ request.user.get_full_name }} Profile">
+              </span>
+            </div>
+          </header>
+        
+        <div class="announce">
+            <h1>Teacher Announcements</h1>
+            {% for announcement in announcements %}
+            <div class="announcement">
+                <h2>{{ announcement.title }}</h2>
+                <p>{{ announcement.content }}</p>
+                {% if announcement.file %}
+                <div class="file">
+                   <a href="{{ announcement.file.url }}">Download File</a>
+                </div>
+                {% endif %}
+                <p>Posted by: {{ announcement.posted_by }}</p>
+                <p>Posted on: {{ announcement.posted_on }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+     <!-- Required vendors -->
+  <script src="{% static 'vendor/global/global.min.js' %}"></script>
+ 
+  
+  <!-- Dashboard 1 -->
+  
+  <script src="{% static 'js/custom.min.js' %}"></script>
+  <script src="{% static 'js/dlabnav-init.js' %}"></script>
+ 
+</body>
+</html>

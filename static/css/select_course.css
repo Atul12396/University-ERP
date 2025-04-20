@@ -1,0 +1,63 @@
+.main-select {
+    max-width: 1000px;
+    margin: 150px;
+    margin-left: 400px;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: white; /* White color */
+    font-size: 40px; /* Adjust font size as needed */
+    margin-bottom: 40px; /* Add spacing below the heading */
+    background-color: #41f1b6; 
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.subject-name {
+    text-align: left;
+}
+
+.subject-container {
+    max-width: 1200px;
+    margin: 0 auto; /* Center the subject container */
+}
+
+.subject-container li {
+    margin-bottom: 10px; /* Add spacing between list items */
+}
+
+.subject-container a {
+    color: black;
+    font-size: 20px;
+    text-decoration: none; 
+    display: block; 
+    padding: 30px; 
+    background-color: #f2f2f2; 
+    border-radius: 15px; 
+    transition: background-color 0.3s ease;
+}
+
+.subject-container a:hover {
+    background-color: #D6EEEE; 
+    text-decoration: none; 
+}
+
+.subject-container .subject-name {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.subject-container .subject-name:hover {
+    transform: scale(1.04);
+}

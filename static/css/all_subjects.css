@@ -1,0 +1,96 @@
+.cheese {
+  align-items: center;
+  max-width: 1200px;
+  margin: 150px;
+  margin-left: 200px;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: white; /* White color */
+  font-size: 40px; /* Adjust font size as needed */
+  margin-bottom: 40px; /* Add spacing below the heading */
+  background-color: #3B82F6; /* Red color */
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.paneer{
+  color: #000;
+}
+
+.detail {
+  
+    color: black; /* Black color */
+    font-size: 20px;
+    text-decoration: none; /* Remove underline */
+    display: block; /* Display as block element for full width */
+    padding: 30px; /* Add padding for better click area */
+    background-color: #f2f2f2; /* Light gray background color */
+    border-radius: 15px; /* Add border radius for rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.detail:hover {
+    background-color: #7aa4ec; /* Light blue background color on hover */    
+}
+.detail:hover {
+    text-decoration: none; /* Underline on hover */
+}
+.box {
+    max-width: 1200px;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .box:hover {
+    transform: scale(1.04);
+  }
+  
+/* Pre-Loader */
+.waviy {
+    position: relative;
+    -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0, 0, 0, 0.2)); }
+  
+  .waviy span {
+    position: relative;
+    display: inline-block;
+    font-size: 40px;
+    color: #000;
+    text-transform: uppercase;
+    animation: waviy 1s infinite;
+    animation-delay: calc(.1s * var(--i)); }
+  
+  @keyframes waviy {
+    0%, 40%, 100% {
+      transform: translateY(0); }
+    20% {
+      transform: translateY(-20px); } }
+  
+  #preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    background-color: #fff; }
+    .waviy span
+    {
+      color: rgb(102 16 242);
+    }
+  
+  [data-theme-version="dark"] #preloader {
+    background: #171622; }
+  
+  [data-theme-version="dark"] .waviy span {
+    color: #fff; }
+  

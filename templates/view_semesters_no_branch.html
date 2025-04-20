@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semesters</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/view_semesters_no_branch.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Semesters</h1>
+        <ul class="semester-list">
+            {% for semester in semesters %}
+                <li class="semester-item">
+                    <a href="{% url 'view_subjects_no_branch' course_id=course.id semester_id=semester.id %}">
+                        {{ semester.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+

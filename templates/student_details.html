@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <h1>Student Profile</h1>
+
+    <div class="profile">
+        <div class="profile-photo">
+            <!-- Display the profile picture with a plus icon -->
+            <div class="profile-picture">
+                <img src="{{ MEDIA_URL }}{{ student.profile_pic.url }}" alt="{{ student.name }} Profile Picture" id="profile-picture">
+            </div>
+            <!-- Add an input field for uploading a new profile picture (hidden by default) -->
+            <input type="file" id="profile-picture-input" style="display: none;">
+            
+            <!-- Add the profile picture upload form here -->
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %} <!-- Include the CSRF token for form security -->
+                {{ profile_pic_form.as_p }}
+                <button type="submit">Upload Profile Picture</button>
+            </form>
+        </div>
+        <div class="info">
+            <h5>Name</h5>
+            <p>{{ student.name }}</p>
+
+            <h5>Contact</h5>
+            <p>{{ student.contact }}</p>
+
+            <h5>Address</h5>
+            <p>{{ student.address }}</p>
+
+            <h5>Email</h5>
+            <p>{{ student.user.email }}</p>
+        </div>
+    </div>
+    
+</body>
+</html>

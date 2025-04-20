@@ -1,0 +1,162 @@
+Metadata-Version: 2.1
+Name: django-simple-tags
+Version: 0.6.1
+Summary: Collection of simple django tags and filters.
+Author: Sun ZhiChuang
+Author-email: sunzhichuang@zencore.cn
+Maintainer: Sun ZhiChuang
+Maintainer-email: sunzhichuang@zencore.cn
+License: MIT
+Keywords: django admin extentions,django simple tags
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3 :: Only
+Description-Content-Type: text/markdown
+Requires-Dist: django
+
+# django-simple-tags
+
+Collection of simple django tags and filters.
+
+## Install
+
+```shell
+pip install django-simple-tags
+```
+
+## Installed Tags or Filters
+
+- Tags
+    - `sprintf`
+    - `string_format`
+    - `admin_url`
+    - `if_cookie`
+    - `get_cookie`
+    - `has_cookie`
+    - `if_setting`
+    - `get_setting`
+    - `has_setting`
+    - `model_select_include`
+    - `call`
+    - `call_method`
+    - `reset`: reset template variable value
+- Filters
+    - `add_string_gap`
+    - `add_string_left_gap`
+    - `add_string_right_gap`
+    - `get_model_verbose_name`
+    - `get_model_app_label`
+    - `get_model_name`
+    - `get_model_fullname`
+    - `show_boolean_icon`
+- Utils
+    - `get_related_model_field`: get model's related model and field by field name.
+
+
+## Settings
+
+**pro/settings.py**
+
+```python
+INSTALLED_APPS = [
+    ...
+    'django_simple_tags',
+    ...
+]
+```
+
+## Usage
+
+```django
+{% load django_simple_tags %}
+
+{% load django_simple_tags %}
+
+<h1>{% sprintf "hello %s" "Tom" %}</h1>
+
+<h1>{% string_format "hi {0}" "Tom" %}</h1>
+
+<h1>{% string_format "hi {name}" name="Tom" %}</h1>
+
+<h1>{% string_format "{0} + {1} = {result}" 3 4 result=7 %}</h1>
+
+<a href="{% admin_url cat "change" %}">{% admin_url cat "change" %}</a>
+
+<h1>{% if_cookie request "sessionid" "sessionid exists.." "sessionid NOT exists.." %}</h1>
+
+<h1>{% get_cookie request "sessionid" %}</h1>
+
+<h1>{% has_cookie request "sessionid" as has_sessionid %}{% if has_sessionid %}sessionid exists..{% else %}sessionid NOT exists..{% endif %}</h1>
+
+<h1>{% if_cookie request "xsessionid" "xsessionid exists..." "xsessionid NOT exists" %}</h1>
+
+<h1>{% get_cookie request "xsessionid" "None" %}</h1>
+
+<h1>{% has_cookie request "xsessionid" as has_xsessionid %}{% if has_xsessionid %}xsessionid exists...{% else %}xsessionid NOT exists...{% endif %}</h1>
+
+<h1>{% if_setting "DEBUG" "settings.DEBUG exists..." "settings.DEBUG not exists..." %}</h1>
+
+<h1>{% get_setting "DEBUG" %}</h1>
+
+<h1>{% has_setting "DEBUG" as has_debug %}{% if has_debug %}settings.DEBUG exists...{% else %}settings.DEBUG NOT exists...{% endif %}</h1>
+
+<h1>{% if_setting "NO_DEBUG" "settings.NO_DEBUG exists..." "settings.NO_DEBUG NOT exists..." %}</h1>
+
+<h1>{% get_setting "NO_DEBUG" False %}</h1>
+
+<h1>{% has_setting "NO_DEBUG" as has_no_debug %}{% if has_no_debug %}NO_DEBUG exists...{% else %}settings.NO_DEBUG NOT exists...{% endif %}</h1>
+
+{% model_select_include cat "hello.html" %}
+
+{% model_select_include cat "world.html" %}
+
+{% model_select_include cat "hi.html" %}
+
+<h1>{% sprintf "Select%sto view" "Category"|add_string_gap:" " %}</h1>
+
+<h1>{% sprintf "Select%sto view" "Category"|add_string_left_gap:" ["|add_string_right_gap:"] " %}</h1>
+
+<h1>{{model_class|get_model_app_label}}</h1>
+
+<h1>{{model_class|get_model_name}}</h1>
+
+<h1>{{model_class|get_model_fullname}}</h1>
+
+<h1>{{model_class|get_model_verbose_name}}</h1>
+```
+
+## Releases
+
+### v0.1.0 2020/02/23
+
+- First release.
+
+### v0.2.0 2020/02/23
+
+- Fix document.
+- Remove print statements.
+- Add filters: add_string_gap, add_string_left_gap, add_string_right_gap.
+
+### v0.3.0 2020/03/03
+
+- Add filters: get_model_app_label, get_model_name, get_model_fullname, get_model_verbose_name.
+
+### v0.4.0 2020/03/21
+
+- Add tags: call, call_method
+
+### v0.5.0 2020/03/22
+
+- Add filter: show_boolean_icon
+
+### v0.6.0 2020/04/27
+
+- Add tag: reset
+- Add utils.get_related_model_field
+
+### v0.6.1 2023/09/14
+
+- Doc update.

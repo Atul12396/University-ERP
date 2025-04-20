@@ -1,0 +1,46 @@
+{% block content %}
+  <h2>Manage Timetable</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="subject">Select Subject:</label>
+    <select name="subject" required>
+      {% for subject in subjects %}
+        <option value="{{ subject.id }}">{{ subject.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="day">Day:</label>
+    <input type="text" name="day" required>
+
+    <label for="time">Time:</label>
+    <input type="text" name="time" required>
+
+    <label for="venue">Venue:</label>
+    <input type="text" name="venue" required>
+
+    <button type="submit">Add Timetable Entry</button>
+  </form>
+
+  <h3>Timetable Entries</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Subject</th>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Venue</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in timetable_entries %}
+        <tr>
+          <td>{{ entry.subject.name }}</td>
+          <td>{{ entry.day }}</td>
+          <td>{{ entry.time }}</td>
+          <td>{{ entry.venue }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

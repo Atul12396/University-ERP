@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Branches</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/view_branches.css' %}">
+</head>
+<body>
+    <h1>Branches</h1>
+    <ul>
+    {% for branch in branches %}
+        <li><a href="{% url 'view_semesters' course_id=course.id branch_id=branch.id %}">{{ branch.name }}</a></li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
