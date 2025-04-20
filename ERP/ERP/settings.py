@@ -87,8 +87,17 @@ WSGI_APPLICATION = 'ERP.ERP.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://erp_db_l9ll_user:7oIqpuFNLtcdLgbw7I7gvK6wdkCXjdyL@dpg-d01kjhadbo4c738rur60-a/erp_db_l9ll')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'erp_db_l9ll',
+        'USER': 'erp_db_l9ll_user',
+        'PASSWORD': '7oIqpuFNLtcdLgbw7I7gvK6wdkCXjdyL',
+        'HOST': 'dpg-d01kjhadbo4c738rur60-a.frankfurt-postgres.render.com',
+        'PORT': '5432',
+    }
 }
+
+
 
  
 
