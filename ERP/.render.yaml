@@ -2,8 +2,14 @@ services:
   - type: web
     name: erp-web
     env: python
-    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate"
-    startCommand: gunicorn ERP.ERP.wsgi:application
+    build:
+    commands:
+    - pip install -r requirements.txt
+    - python manage.py collectstatic --noinput
+    - python manage.py makemigrations
+    - python manage.py migrate
+    start: gunicorn ERP.ERP.wsgi:application
+
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: ERP.ERP.settings
