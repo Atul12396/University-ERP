@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -86,10 +85,9 @@ WSGI_APPLICATION = 'ERP.ERP.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-load_dotenv()  # This loads the .env file
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(default='postgresql://erp_db_l9ll_user:7oIqpuFNLtcdLgbw7I7gvK6wdkCXjdyL@dpg-d01kjhadbo4c738rur60-a/erp_db_l9ll')
 }
 
  
