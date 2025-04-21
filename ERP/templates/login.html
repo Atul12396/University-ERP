@@ -179,6 +179,16 @@
         <input type="password" placeholder="Password" id="password" name="password">
 
         <button type="submit">Log In</button>
+
+        {% if messages %}
+                <div id="mess"  class="messages">
+                    {% for message in messages %}
+                        <div class="message {% if message.tags %} {{ message.tags }} {% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         <!-- <input type="button" value=""> -->
         <!-- <div class="social">
           <div class="go"><i class="fab fa-google"></i>  Google</div>

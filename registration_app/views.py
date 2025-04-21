@@ -759,9 +759,9 @@ def apply_leave(request):
             ).count()
 
             # If teacher has already applied for two leaves, show an error message
-            if leave_count >= 2:
+            if leave_count >= 4:
                 messages.error(request, "You can only apply for two leaves per month.")
-                return redirect('teacher_dashboard')
+                return render(request, 'apply_leave.html')
 
             # Save leave request if limit not reached
             Leave.objects.create(
@@ -774,7 +774,7 @@ def apply_leave(request):
             )
 
             messages.success(request, "Your leave request has been submitted successfully.")
-            return redirect('teacher_dashboard')
+            return render(request,'apply_leave.html')
 
         return render(request, 'apply_leave.html')
 

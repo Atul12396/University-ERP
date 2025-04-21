@@ -116,6 +116,15 @@
         <button type="submit">Submit Request</button>
         <br>
     </form>
+    {% if messages %}
+                <div id="mess"  class="messages">
+                    {% for message in messages %}
+                        <div class="message {% if message.tags %} {{ message.tags }} {% endif %}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
 </div>
 <script src="timeTable.js"></script>
   <script src="app.js"></script>
