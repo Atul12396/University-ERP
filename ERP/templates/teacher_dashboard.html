@@ -122,21 +122,24 @@
   
         
         <!-- Announcements Section (Horizontal Layout) -->
-<div class="announcements-section">
-  <h2>Announcements</h2>
-  <div class="updates horizontal">
-    {% for announcement in announcements %}
-    <div class="announcement-message">
-      <p>{{ announcement.title }}</p>
-      <p>{{ announcement.content }}</p>
-      {% if announcement.file %}  
-      <a href="{{ announcement.file.url }}" download>Download PDF</a>
-      {% endif %}
-      <p><small>{{ announcement.posted_on }}</small> Posted on</p>
-    </div>
-    {% endfor %}
-  </div>
-</div>
+        <div class="announcements-section">
+          <h2>Announcements</h2>
+          <div class="updates horizontal">
+            {% for announcement in announcements %}
+            <div class="announcement-message">
+              <p>{{ announcement.title|default:"No Title" }}</p>
+              <p>{{ announcement.content|default:"No content available." }}</p>
+              {% if announcement.file %}
+                <a href="{{ announcement.file.url }}" download>Download PDF</a>
+              {% else %}
+                <p>No file available</p>
+              {% endif %}
+              <p><small>{{ announcement.posted_on|default:"Date not available" }}</small> Posted on</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        
 
           </div>
         </div>
