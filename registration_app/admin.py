@@ -92,12 +92,9 @@ class StudentAdminForm(forms.ModelForm):
         fields = '__all__'
         #exclude = ['subjects']
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     if self.instance and self.instance.hostel_status == 'Non-Allocated':
-    #         self.fields['hostel'].widget = forms.HiddenInput()
-    #         self.fields['block'].widget = forms.HiddenInput()
-    #         self.fields['room'].widget = forms.HiddenInput()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['user'].queryset = CustomUser.objects.filter(role='student')
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
