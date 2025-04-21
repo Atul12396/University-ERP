@@ -90,24 +90,36 @@ class StudentAdminForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = '__all__'
-        #exclude = ['subjects']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['user'].queryset = CustomUser.objects.filter(role='student')
+        
+        # Get users with student role
+        student_users = CustomUser.objects.filter(role='student')
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     if self.instance and self.instance.transport_status == 'Non-Allocated':
-    #         self.fields['transport_name'].widget = forms.HiddenInput()
+        # Get users already linked to a Student
+        used_users = Student.objects.exclude(pk=self.instance.pk).values_list('user_id', flat=True)
 
-    #     self.fields['user'].queryset = CustomUser.objects.filter(role='student')
+        # Exclude already-used users unless we're editing one
+        self.fields['user'].queryset = student_users.exclude(id__in=used_users)
+
+        # If editing, include the currently linked user
+        if self.instance.pk:
+            self.fields['user'].queryset = CustomUser.objects.filter(
+                id__in=[*self.fields['user'].queryset.values_list('id', flat=True), self.instance.user.id]
+            )
 
     def clean_user(self):
-        username = self.cleaned_data['user'].username
-        if Student.objects.filter(user__username=username).exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError('This username is already associated with another student.')
-        return self.cleaned_data['user']
+        user = self.cleaned_data['user']
+        if Student.objects.filter(user=user).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError('This user is already associated with another student.')
+        return user
+
+
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'semester', 'branch', 'roll_number', 'name', 'contact', 'address', 'course')
+    raw_id_fields = ['course', 'branch', 'semester']
+    form = StudentAdminForm
 
 
 
