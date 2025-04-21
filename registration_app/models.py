@@ -11,7 +11,6 @@ class Announcement(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     file = models.FileField(upload_to='announcements/', null=True, blank=True)
-    posted_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -95,8 +94,7 @@ class HOD(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user
+    
 
 class SS(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
@@ -261,16 +259,26 @@ class Student(models.Model):
             if hostel_fee:
                 self.fee_structure.hostel_fees = hostel_fee
                 self.fee_structure.save()
+    
+    def clean(self):
+        if self.hostel_room and not self.hostel_room.is_available():
+            raise ValidationError({
+            'hostel_room': f"Room {self.hostel_room.room_no} is already full. Please select another room."
+        })
 
     def save(self, *args, **kwargs):
-        """Override save method to auto-assign hostel fees when fee structure is assigned"""
+    # Check if selected hostel room is full
+        if self.hostel_room and not self.hostel_room.is_available():
+            raise ValidationError(f"Room {self.hostel_room.room_no} is already full. Please select another room.")
+
+    # Auto-assign hostel based on fee structure if not manually selected
         if self.fee_structure and not self.hostel_room:
             # Auto-assign hostel based on the fee structure room type (AC/Non-AC)
             hostel_details = HostelDetails.objects.filter(room_type=self.fee_structure.hostel_fees.hostel_details.room_type).first()
             if hostel_details:
                 self.hostel_room = hostel_details
         super().save(*args, **kwargs)
-        self.assign_hostel_fees()  # Ensure hostel fees are assigned after saving the student
+        self.assign_hostel_fees()
 
 
 

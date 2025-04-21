@@ -106,7 +106,6 @@ class Migration(migrations.Migration):
                 ('content', models.TextField()),
                 ('file', models.FileField(blank=True, null=True, upload_to='announcements/')),
                 ('posted_on', models.DateTimeField(auto_now_add=True)),
-                ('posted_by', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
